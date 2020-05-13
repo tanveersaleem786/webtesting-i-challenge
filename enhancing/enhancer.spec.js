@@ -33,4 +33,18 @@ describe("game unit tests", () => {
         
     })
 
+    it("fail", () => {
+
+        expect(enhancer.fail({name: "Afzal", durability: 7, enhancement: 10 })).toEqual({name: "Afzal", durability: 2, enhancement: 10})
+
+        expect(enhancer.fail({name: "Jamshaid", durability: 3, enhancement: 3 })).toEqual({name: "Jamshaid", durability: 0, enhancement: 3})
+
+        expect(enhancer.fail({name: "Saqib", durability: 50, enhancement: 15 })).toEqual({name: "Saqib", durability: 40, enhancement: 15})
+
+        expect(enhancer.fail({name: "Naeem", durability: 7, enhancement: 15 })).toEqual({name: "Naeem", durability: 0, enhancement: 15})
+
+        expect(enhancer.fail({name: "Bilal", durability: 45, enhancement: 20 })).toEqual({name: "Bilal", durability: 35, enhancement: 19})
+
+    })
+
 })
