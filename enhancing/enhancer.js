@@ -5,8 +5,17 @@ module.exports = {
   get,
 };
 
-function succeed(item) {
-  return { ...item };
+function succeed(item) {  
+  let upt_enhancement = '';
+  if(item.enhancement < 0)
+    upt_enhancement = 0;
+  else if(item.enhancement >= 20)
+    upt_enhancement = 20;
+  else
+    upt_enhancement = item.enhancement+1;
+  
+  //return { ...item, enhancement: item.enhancement+1};
+  return { ...item, enhancement: upt_enhancement}; 
 }
 
 function fail(item) {
@@ -14,7 +23,7 @@ function fail(item) {
 }
 
 function repair(item) {
-  return { ...item };
+  return { ...item, durability: 100};
 }
 
 function get(item) {
