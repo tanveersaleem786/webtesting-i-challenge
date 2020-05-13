@@ -47,4 +47,13 @@ describe("game unit tests", () => {
 
     })
 
+
+    it("get", () => {
+
+        expect(enhancer.get({name: "Jamil", durability: 7, enhancement: 0 })).toEqual({name: "Jamil", durability: 7, enhancement: 0})
+
+        expect(enhancer.get({name: "Hassan", durability: 12, enhancement: 19 })).toEqual({name: "[+19]Hassan", durability: 12, enhancement: 19})
+
+    })
+
 })
