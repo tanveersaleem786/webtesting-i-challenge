@@ -1,13 +1,21 @@
-module.exports = {
-  succeed,
-  fail,
-  repair,
-  get,
-};
+
+const items = [
+  {name: "Weapon1", durability: 0, enhancement: 12 },
+  {name: "Weapon2", durability: 10, enhancement: 15 },
+  {name: "Weapon3", durability: 50, enhancement: 20 },
+  {name: "Weapon4", durability: 90, enhancement: 17 },
+  {name: "Weapon5", durability: 100, enhancement: "test"}
+]
+
+
 
 function succeed(item) {  
   
     let {enhancement} = item;
+
+    if(typeof enhancement !== "number") {
+      throw new TypeError("enhancment should be a number")
+    }
     
     if(enhancement < 0) {
 
@@ -31,6 +39,10 @@ function succeed(item) {
 function fail(item) {
   
     let {enhancement, durability} = item
+
+    if(typeof enhancement !== "number" || typeof durability !== "number") {
+      throw new TypeError("enhancment and durability should be a number")
+    }
     
     if(enhancement < 15) {
 
@@ -57,6 +69,10 @@ function repair(item) {
 function get(item) {
 
     let {name, enhancement} = item
+
+    if(typeof enhancement !== "number") {
+      throw new TypeError("enhancment should be a number")
+    }
       
     if(enhancement > 0) 
         name = `[+${enhancement}]${name}`    
@@ -64,3 +80,15 @@ function get(item) {
     return { ...item, name: name};
 
 }
+
+
+
+module.exports = {
+  items,
+  succeed,
+  fail,
+  repair,
+  get,
+  
+};
+

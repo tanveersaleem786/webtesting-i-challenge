@@ -1,58 +1,69 @@
 const enhancer = require('./enhancer.js');
 // test away!
-describe("game unit tests", () => {
+describe("enhancement unit tests", () => {
+
+    beforeEach(() => {
+
+        enhancer.items  [
+                            {name: "Weapon1", durability: 0, enhancement: 12 },
+                            {name: "Weapon2", durability: 10, enhancement: 15 },
+                            {name: "Weapon3", durability: 50, enhancement: 20 },
+                            {name: "Weapon4", durability: 90, enhancement: 17 },
+                            {name: "Weapon5", durability: 100, enhancement: "test"}
+        ]
+    })
 
     it("repaire", () => {
 
-        expect(enhancer.repair({name: "Tanveer", durability: 0, enhancement: 12 })).toEqual({name: "Tanveer", durability: 100, enhancement: 12 })
+        expect(enhancer.repair(enhancer.items[0])).toEqual({...enhancer.items[0], durability: 100})
 
-        expect(enhancer.repair({name: "Naveed", durability: 10, enhancement: 15 })).toEqual({name: "Naveed", durability: 100, enhancement: 15 })
+        expect(enhancer.repair(enhancer.items[1])).toEqual({...enhancer.items[1], durability: 100})
 
-        expect(enhancer.repair({name: "Waqas", durability: 50, enhancement: 20 })).toEqual({name: "Waqas", durability: 100, enhancement: 20 })
+        expect(enhancer.repair(enhancer.items[2])).toEqual({...enhancer.items[2], durability: 100})
 
-        expect(enhancer.repair({name: "Aleem", durability: 90, enhancement: 17 })).toEqual({name: "Aleem", durability: 100, enhancement: 17 })
+        expect(enhancer.repair(enhancer.items[3])).toEqual({...enhancer.items[3], durability: 100})
 
-        expect(enhancer.repair({name: "Kashif", durability: 100, enhancement: 9 })).toEqual({name: "Kashif", durability: 100, enhancement: 9 })
+        expect(enhancer.repair(enhancer.items[4])).toEqual({...enhancer.items[4], durability: 100})
+
+       
     
     })
 
 
     it("succeed", () => {
 
-        expect(enhancer.succeed({name: "Amjad", durability: 7, enhancement: 10 })).toEqual({name: "Amjad", durability: 7, enhancement: 11 })
+        expect(enhancer.succeed(enhancer.items[0])).toEqual({...enhancer.items[0], enhancement: 13})
 
-        expect(enhancer.succeed({name: "Basit", durability: 63, enhancement: 15 })).toEqual({name: "Basit", durability: 63, enhancement: 16 })
+        expect(enhancer.succeed(enhancer.items[1])).toEqual({...enhancer.items[1], enhancement: 16})
 
-        expect(enhancer.succeed({name: "Sohail", durability: 55, enhancement: -1 })).toEqual({name: "Sohail", durability: 55, enhancement: 0 })
+        expect(enhancer.succeed(enhancer.items[2])).toEqual({...enhancer.items[2], enhancement: 20})
 
-        expect(enhancer.succeed({name: "Atif", durability: 80, enhancement: 21 })).toEqual({name: "Atif", durability: 80, enhancement: 20 })
+        expect(enhancer.succeed(enhancer.items[3])).toEqual({...enhancer.items[3], enhancement: 18})
 
-        expect(enhancer.succeed({name: "Qaiser", durability: 45, enhancement: 20 })).toEqual({name: "Qaiser", durability: 45, enhancement: 20 })
-    
-    
+        expect(() => enhancer.succeed((enhancer.items[4])).toThrow())
         
     })
 
     it("fail", () => {
 
-        expect(enhancer.fail({name: "Afzal", durability: 7, enhancement: 10 })).toEqual({name: "Afzal", durability: 2, enhancement: 10})
+         expect(enhancer.fail(enhancer.items[0])).toEqual({...enhancer.items[0], durability: 0})
 
-        expect(enhancer.fail({name: "Jamshaid", durability: 3, enhancement: 3 })).toEqual({name: "Jamshaid", durability: 0, enhancement: 3})
+         expect(enhancer.fail(enhancer.items[1])).toEqual({...enhancer.items[1], durability: 0})
 
-        expect(enhancer.fail({name: "Saqib", durability: 50, enhancement: 15 })).toEqual({name: "Saqib", durability: 40, enhancement: 15})
+         expect(enhancer.fail(enhancer.items[2])).toEqual({...enhancer.items[2], durability: 40, enhancement: 19})
 
-        expect(enhancer.fail({name: "Naeem", durability: 7, enhancement: 15 })).toEqual({name: "Naeem", durability: 0, enhancement: 15})
+         expect(enhancer.fail(enhancer.items[3])).toEqual({...enhancer.items[3], durability: 80, enhancement: 16})
 
-        expect(enhancer.fail({name: "Bilal", durability: 45, enhancement: 20 })).toEqual({name: "Bilal", durability: 35, enhancement: 19})
-
+         expect(()=> enhancer.fail(enhancer.items[4])).toThrow()
+         
     })
 
 
     it("get", () => {
 
-        expect(enhancer.get({name: "Jamil", durability: 7, enhancement: 0 })).toEqual({name: "Jamil", durability: 7, enhancement: 0})
+        expect(enhancer.get(enhancer.items[0])).toEqual({...enhancer.items[0], name: "[+12]Weapon1"})
 
-        expect(enhancer.get({name: "Hassan", durability: 12, enhancement: 19 })).toEqual({name: "[+19]Hassan", durability: 12, enhancement: 19})
+        expect(enhancer.get(enhancer.items[1])).toEqual({...enhancer.items[1], name: "[+15]Weapon2"})
 
     })
 
